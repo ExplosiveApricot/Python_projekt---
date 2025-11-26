@@ -4,7 +4,7 @@ from ryggsäck import *
 
 
 class monster:
-    def __init__ (self,hp,atk,int):
+    def __init__ (self,atk,hp,int):
         self.hp=hp
         self.atk=atk
         self.int=int
@@ -30,6 +30,11 @@ def troll_strid(a,h,i):
             if din_skada>troll1_skada:
                 skada = din_skada-troll1_skada
                 troll1.hp -= skada
+                if skada>=troll1.hp:
+                    print("Trollet dör av din  tuffa attack!")
+                    break
+                else:
+                    continue
                 print(f"""System: Du slår hårt mot demonfan, den träffar!
                     Du gör {skada} skada, så demonfan har {troll1.hp} hälsa kvar!
                       """)
@@ -48,7 +53,10 @@ def troll_strid(a,h,i):
             if din_skada>troll1_skada:
                 skada = din_skada-troll1_skada
                 troll1.hp-=skada
-                if skada >= 20:
+                if skada>=troll1.hp:
+                    troll1.hp=0
+                    print("Trollet dör av din hjärnkraft!")
+                elif skada >= 20:
                     print(f"""System: Du får trollet att slå sig själv med en sten med din skarpa tunga 
                           Du gör {skada} skada 
                           nu har trollet {troll1.hp} hälsa kvar!""")
@@ -68,3 +76,6 @@ def troll_strid(a,h,i):
                 (f"""System: Trollet utsmartar dig!
                 Du tar {skada}skada
                 Du har {klass.hp} hälsa kvar!""")
+
+
+troll_strid(1,1,1)

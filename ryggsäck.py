@@ -1,7 +1,7 @@
 ryggsäck=[]
 
 def öppna_säckfan():
-    if ryggsäck.len>0:
+    if len(ryggsäck)>0:
         for i in range(ryggsäck):
             print(i)
     else:
