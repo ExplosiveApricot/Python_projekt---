@@ -3,7 +3,7 @@ from spelaren import *
 from ryggsäck import *
 
 
-class monster:
+class fiende:
     def __init__ (self,atk,hp,int):
         self.hp=hp
         self.atk=atk
@@ -14,7 +14,7 @@ class monster:
 
 def troll_strid(a,h,i):
     i_strid = True
-    troll1 = monster(a,h,i)
+    troll1 = fiende(a,h,i)
     print(f"""System: Du stöter på ett troll!!!!
           Den har {troll1.atk} attack, {troll1.hp} hälsa och {troll1.int} intelligens!!
           """)
