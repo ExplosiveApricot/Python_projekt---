@@ -76,6 +76,3 @@ def troll_strid(a,h,i):
                 (f"""System: Trollet utsmartar dig!
                 Du tar {skada}skada
                 Du har {klass.hp} hälsa kvar!""")
-
-
-troll_strid(1,1,1)
