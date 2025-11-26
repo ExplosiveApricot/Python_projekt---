@@ -1,6 +1,7 @@
 class spelaren():
-    def __init__(self,atk,hp,int):
+    def __init__(self,atk,mhp,hp,int):
         self.atk = atk
+        self.mhp = mhp
         self.hp = hp
         self.int = int
 
@@ -8,28 +9,27 @@ klas = False
 
 while not klas:
     klassval = input("""
-                        System: Vilken inriktning går du?
                      
-                        1. Bygg: 21 atk, 21 hp, 0 int  
+                        1. Bygg
 
-                        2. Teknik: 5 atk, 16 hp, 21 int 
+                        2. Teknik
 
-                        3. Samhäll: 14 atk, 14 hp, 14 int
+                        3. Samhäll
     Ditt val---> """)
 
     if klassval == "1":
         klass = spelaren(21,21,0)
-        print(f"Random Dansk: Du går bygg och har därmed statsen: {klass.atk} atk, {klass.hp} hp och {klass.int} int")
+        print(f"Random Dansk: Du går bygg och har därmed statsen: {klass.atk} atk, {klass.mhp} hp och {klass.int} int")
         klas = True
 
     elif klassval == "2":
         klass = spelaren(5,16,21)
-        print(f"Random Dansk: Det var alltså du som lukta, du har statsen: {klass.atk} atk, {klass.hp} hp och {klass.int} int")
+        print(f"Random Dansk: Det var alltså du som lukta, du har statsen: {klass.atk} atk, {klass.mhp} hp och {klass.int} int")
         klas = True
 
     elif klassval == "3":
         klass = spelaren(14,14,14)
-        print(f"Random Dansk: Du går nu sam med statsen: {klass.atk} atk, {klass.hp} hp och {klass.int} int")
+        print(f"Random Dansk: Du går nu sam med statsen: {klass.atk} atk, {klass.mhp} hp och {klass.int} int")
         klas = True
 
     else:
