@@ -18,17 +18,17 @@ while not klas:
     Ditt val---> """)
 
     if klassval == "1":
-        klass = spelaren(21,21,0)
+        klass = spelaren(50,50,50,0)
         print(f"Random Dansk: Du går bygg och har därmed statsen: {klass.atk} atk, {klass.mhp} hp och {klass.int} int")
         klas = True
 
     elif klassval == "2":
-        klass = spelaren(5,16,21)
+        klass = spelaren(5,16,16,21)
         print(f"Random Dansk: Det var alltså du som lukta, du har statsen: {klass.atk} atk, {klass.mhp} hp och {klass.int} int")
         klas = True
 
     elif klassval == "3":
-        klass = spelaren(14,14,14)
+        klass = spelaren(14,14,14,14)
         print(f"Random Dansk: Du går nu sam med statsen: {klass.atk} atk, {klass.mhp} hp och {klass.int} int")
         klas = True
 

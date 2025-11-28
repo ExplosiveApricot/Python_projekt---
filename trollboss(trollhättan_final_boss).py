@@ -13,8 +13,58 @@ Monkel: Vilken svag människa står framför mig?""")
     print(f"""
 Monkel: {namn} alltså. 
 System: han ställer sig upp, marken vibrerar
-Monkel: Dags att dö människa""")
-    i_strid = True
-    while i_strid and Monkel.hp>0 and klass.hp>0:
-        print(f"Stanken borrar in sig i dina näsborrar, du tappar 5 hp")
-        klass.hp-=5
+Monkel: Dags att dö människa
+System: En strid bryter ut! Monkel har {Monkel.atk} skada, {Monkel.hp} hälsa och {Monkel.int} intelligens!""")
+    while Monkel.hp>0 and klass.hp>0:
+        print(f"Stanken borrar in sig i dina näsborrar, du tappar 1 max hp")
+        if klass.hp == klass.mhp:
+            klass.mhp-=1
+            klass.hp-=1
+        else:
+            klass.mhp-=1
+        viktigt_val = input(print("""
+System: Du känner din drivkraft stärker dina attacker. Allt hänger på detta, vad vill du göra? 
+1. Attackera
+2. Inventory
+3. Utsmarta 
+--->"""))
+
+        if viktigt_val=="1":
+            viktig_skada = r.randint(0,klass.atk)
+            monkel_skada = r.randint(0,Monkel.atk)
+            if viktig_skada>=monkel_skada:
+                skada = viktig_skada+10-monkel_skada
+                if skada>=Monkel.hp:
+                    Monkel.hp=0
+                else:    
+                    Monkel.hp -= skada
+                print(f"""
+System: Din attack träffar Monkel och han tar {skada} skada!!
+        han har nu {Monkel.hp} hp kvar!""")
+
+            else:
+                skada = monkel_skada-viktig_skada
+                klass.hp -=skada
+                print(f""" 
+System:Du på något sätt missar den fetaste varelsen någonsin och tar {skada} skada.
+Bara {klass.hp} hp kvar!
+""")
+        elif viktigt_val == "2":
+            öppna_säckfan
+            if "Konstigt mynt" in ryggsäck:
+                Monkel.hp=0
+                print(""" 
+System: När du öppnar din ryggsäck händer något konstigt. 
+        Myntet, som du fick av Nikodemus, börjar glöda till, och Monkel faller ihop på plats""")
+        elif viktigt_val == "3":
+            print("""
+System: Är du helt dum????
+        Han har 20 000 intelligens! 
+        Det är ju bara självmord och jämföra dina stats med hans!!!""")
+    if Monkel.hp ==0:
+        print("""
+System: Striden pågår i vad som känns i en evighet, men tillslut  faller Monkel ihop. 
+        Du har vunnit!
+        Eller?""")
+
+trollhättan_final_boss()
