@@ -34,15 +34,15 @@ def troll_strid(a,mh,h,i):
                 if skada>=troll1.hp:
                     print("Trollet dör av din tuffa attack!")
                     break
-                print(f"""System: Du slår hårt mot demonfan, den träffar!
-                    Du gör {skada} skada, så demonfan har {troll1.hp} hälsa kvar!
+                print(f"""System: Du slår hårt mot trollet, den träffar!
+                    Du gör {skada} skada, så trollet har {troll1.hp} hälsa kvar!
                       """)
             elif din_skada==troll1_skada:
                 print("System: Du missar, men det gör också trollet!")
             else:
                 skada = troll1_skada-din_skada
                 klass.hp -= skada
-                print(f"""System: Ditt feta arsle missar demonfan och du tar {skada} skada!!!
+                print(f"""System: Ditt feta arsle missar trollet och du tar {skada} skada!!!
                       Nu har du bara {klass.hp} hälsa kvar *emoji som biter på naglarna eller något*""")
         elif stridval == "2":
             öppna_säckfan()
