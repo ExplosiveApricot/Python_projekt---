@@ -4,7 +4,7 @@ from ryggsäck import *
 from troll import *
 
 def trollhättan_final_boss():
-    Monkel = fiende(50,500,20000)
+    Monkel = fiende(50,500,500,20000)
     print("""
 System: Du känner stank från alla vinklar, men den börjar bli starkare varje steg du tar, tills en gigantisk figur dyker upp i din synvinkel
         Framför dig står den fetaste varelsen du någonsin sett, kungen av Trollhättan, Monkel Tronkel den 3:e.
@@ -67,4 +67,21 @@ System: Striden pågår i vad som känns i en evighet, men tillslut  faller Monk
         Du har vunnit!
         Eller?""")
 
-trollhättan_final_boss()
+
+def fas_två():
+    print("""
+Monkel: Trodde du verkligen att du hade besegrat mig?!?!
+        Du är bara en mesig människa, du kommer aldrig lyckas!!!!!""")
+    Monkel2 = fiende(100000000000000,100000000000000,100000000000000,100000000000000)
+    print(f"""
+System: Du stöter på Monkel en andra gång! 
+        Han har statsen {Monkel2.hp} häsla, {Monkel2.atk} attack och {Monkel2.int} intelligens...
+        """)
+    while Monkel2.hp>0:
+        vval2 = input("System: Vad vill du göra?" \
+        "1. Attackera" \
+        "2. Öppna ryggsäck" \
+        "3. Utsmarta" \
+        "4. Leta efter svagheter" \
+        "---->")
+        
