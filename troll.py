@@ -1,20 +1,21 @@
 import random as r
 from spelaren import * 
 from ryggsäck import *
-
+from levelup import  *
 
 class fiende:
-    def __init__ (self,atk,hp,int):
-        self.hp=hp
-        self.atk=atk
-        self.int=int
+    def __init__ (self,atk,mhp,hp,int):
+        self.mhp = mhp
+        self.hp = hp
+        self.atk = atk
+        self.int = int
 
 
 
 
-def troll_strid(a,h,i):
+def troll_strid(a,mh,h,i):
     i_strid = True
-    troll1 = fiende(a,h,i)
+    troll1 = fiende(a,mh,h,i)
     print(f"""System: Du stöter på ett troll!!!!
           Den har {troll1.atk} attack, {troll1.hp} hälsa och {troll1.int} intelligens!!
           """)
@@ -31,15 +32,13 @@ def troll_strid(a,h,i):
                 skada = din_skada-troll1_skada
                 troll1.hp -= skada
                 if skada>=troll1.hp:
-                    print("Trollet dör av din  tuffa attack!")
+                    print("Trollet dör av din tuffa attack!")
                     break
-                else:
-                    continue
                 print(f"""System: Du slår hårt mot demonfan, den träffar!
                     Du gör {skada} skada, så demonfan har {troll1.hp} hälsa kvar!
                       """)
             elif din_skada==troll1_skada:
-                print("System: Du missar, men det gör också demonen!")
+                print("System: Du missar, men det gör också trollet!")
             else:
                 skada = troll1_skada-din_skada
                 klass.hp -= skada
@@ -76,3 +75,9 @@ def troll_strid(a,h,i):
                 (f"""System: Trollet utsmartar dig!
                 Du tar {skada}skada
                 Du har {klass.hp} hälsa kvar!""")
+    if troll1.hp == 0:
+        print(f"""
+System: Trollet dog och du får {troll1.mhp} exp! """)
+        klass.exp += troll1.mhp
+        if klass.exp>=100*1.1**klass.lvl:
+            levelup()
