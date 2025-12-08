@@ -1,8 +1,10 @@
 ryggsäck=[]
+from slowtypeshii import slowprint
 
 def öppna_säckfan():
     if len(ryggsäck)>0:
-        for i in range(ryggsäck):
-            print(i)
+        # fix: iterera över listan direkt
+        for item in ryggsäck:
+            slowprint(item)
     else:
-        print("System: Det är tomt här...")
+        slowprint("System: Det är tomt här...")
