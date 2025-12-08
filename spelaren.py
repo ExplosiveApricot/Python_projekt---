@@ -22,7 +22,7 @@ while not klas:
     Ditt val---> """)
 
     if klassval == "1":
-        klass = spelaren(21,21,21,0,0,0,0)
+        klass = spelaren(151,151,151,0,0,0,0)
         slowprint(f"Random Dansk: Du går bygg och har därmed statsen: {klass.atk} atk, {klass.mhp} hp och {klass.int} int")
         klas = True
 

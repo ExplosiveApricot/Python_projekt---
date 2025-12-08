@@ -12,7 +12,6 @@ class fiende:
         self.hp = hp
         self.atk = atk
         self.int = int
-        # använd namn om det skickas in, annars slumpa
         self.namn = namn if namn else r.choice(monster_namn)
 
 
@@ -26,7 +25,6 @@ def troll_strid(a,mh,h,i):
     while troll1.hp>0 and klass.hp>0 and i_strid:
         if klassval == "2":
             slowprint(f"{troll1.namn} är immun mot din stank")
-        # fix: ta bort input(print(...)) -> använd bara input(...)
         stridval = input("""System: Vad vill du göra?
                             1. Attackera  (atk)
                             2. Kolla säcken  
@@ -100,6 +98,3 @@ System: {troll1.namn} dog och du får {troll1.mhp} exp! """)
             klass.exp -= threshold
             levelup()
             threshold = int(100 * (1.1 ** klass.lvl))
-
-troll_strid(15,100,100,5,)
-troll_strid(21,110,110,10,)
