@@ -6,7 +6,7 @@ from slowtypeshii import slowprint
 
 def trollhättan_final_boss():
     i=0
-    Monkel = fiende(50,500,500,20000,"Monkel Tronkel III")
+    Monkel = fiende("Monkel Tronkel III")
     slowprint("""
 System: Du känner stank från alla vinklar, men den börjar bli starkare varje steg du tar, tills en gigantisk figur dyker upp i din synvinkel
         Framför dig står den fetaste varelsen du någonsin sett, kungen av Trollhättan, Monkel Tronkel den 3:e.
@@ -21,7 +21,7 @@ System: En strid bryter ut! Monkel har {Monkel.atk} skada, {Monkel.hp} hälsa oc
         i+=1
         if klassval == "2":
             slowprint("System: Du stinker! Men Monkel tar ingen skada av det...")
-            slowprint("     Men du är också immun mot hans stank!")
+            slowprint("Men du är också immun mot hans stank!")
         else:
             slowprint("Stanken borrar in sig i dina näsborrar, du tappar 1 max hp")
         if klass.hp == klass.mhp:
@@ -84,7 +84,7 @@ def fas_två():
     slowprint("""
 Monkel: Trodde du verkligen att du hade besegrat mig?!?! 
         Du är bara en mesig människa, du kommer aldrig lyckas!!!!!""")
-    Monkel2 = fiende(100000000000000,100000000000000,100000000000000,100000000000000)
+    Monkel2 = fiende("Slutgiltiga Monkel")
     slowprint(f"""
 System: Du stöter på Monkel en andra gång! 
         Han har statsen {Monkel2.hp} häsla, {Monkel2.atk} attack och {Monkel2.int} intelligens...
@@ -103,7 +103,7 @@ System: Vad vill du göra?
         vval2 = input("----> ")
         if vval2 == "1":
             slowprint("""
-System: Det  där är nog inte en bra idé...""")
+System: Det där är nog inte en bra idé...""")
         elif vval2 == "2":
             öppna_säckfan()
             slowprint("System: Det verkar inte finnas något av användning...")
@@ -142,5 +142,10 @@ System: Denna kristall ger dig alltså  makten att regera över trollhättan, vi
                     slowprint("System: Du krossar kristallen och därmed Monkels hopp om tronen. Du räddade Åva från trollhotet! Grattis!")
                     svagpunkt = True
 
+singelstrid("Monkel Tronkel Jr")
+singelstrid("Blorg den korte")
+singelstrid("Gorg den fete")
+flerastrid("Monkel Tronkel Jr","Blorg den korte","Gorg den fete")
+singelstrid("Zull den mäktige")
 trollhättan_final_boss()
-fas_två() 
+fas_två()
