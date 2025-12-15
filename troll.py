@@ -14,26 +14,31 @@ class fiende:
             self.mhp = 30
             self.hp = 30
             self.int = 5
+            self.special = 0
         elif namn == "Blorg den korte":
             self.atk = 5
             self.mhp = 50
             self.hp = 50
             self.int = 10
+            self.special = 0
         elif namn == "Gorg den fete":
             self.atk = 1
             self.mhp = 150
             self.hp = 150
             self.int = 15
+            self.special = 0
         elif namn == "Zull den mäktige":
             self.atk = 70
-            self.mhp = 60
-            self.hp = 60
+            self.mhp = 100
+            self.hp = 100
             self.int = 10
+            self.special = 0
         elif namn == "Throg den smarte":
             self.atk = 10
-            self.mhp = 60
-            self.hp = 60
+            self.mhp = 100
+            self.hp = 100
             self.int = 70
+            self.special = 0
         elif namn == "Gruk, förstöraren":
             self.atk = 75
             self.mhp = 350
@@ -270,6 +275,11 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                 försvar = r.randint(0,klass.atk)
                 troll1_atk = r.randint(0,troll_nr1.atk)
                 troll1_int = r.randint(0,troll_nr1.int)
+                if troll_nr1.special > 0 and troll_nr1.hp < (troll_nr1.mhp//2):
+                    slowprint(f"{troll_nr1.namn} använder sin special och tar 50 hp från dig!")
+                    klass.hp -= 50
+                    troll_nr1.special -= 1
+                    troll_nr1.hp += 50
                 if troll1_atk>troll1_int:
                     if troll1_atk>försvar:
                         skada = troll1_atk - försvar
@@ -287,6 +297,11 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                 försvar = r.randint(0,klass.atk)
                 troll2_atk = r.randint(0,troll_nr2.atk)
                 troll2_int = r.randint(0,troll_nr2.int)
+                if troll_nr1.special > 0 and troll_nr2.hp < (troll_nr2.mhp//2):
+                    slowprint(f"{troll_nr2.namn} använder sin special och tar 50 hp från dig!")
+                    klass.hp -= 50
+                    troll_nr2.special -= 1
+                    troll_nr2.hp += 50
                 if troll2_atk>troll2_int:
                     if troll2_atk>försvar:
                         skada = troll2_atk - försvar
@@ -304,6 +319,11 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                 försvar = r.randint(0,klass.atk)
                 troll3_atk = r.randint(0,troll_nr3.atk)
                 troll3_int = r.randint(0,troll_nr3.int)
+                if troll_nr3.special > 0 and troll_nr3.hp < (troll_nr3.mhp//2):
+                    slowprint(f"{troll_nr3.namn} använder sin special och tar 50 hp från dig!")
+                    klass.hp -= 50
+                    troll_nr3.special -= 1
+                    troll_nr3.hp += 50
                 if troll3_atk>troll3_int:
                     if troll3_atk>försvar:
                         skada = troll3_atk - försvar
@@ -410,6 +430,11 @@ def singelstrid(a):
             else:
                 slowprint(f"{troll1.namn} missar sin attack!")
         else:
+            if troll1.special >0 and troll1.hp < (troll1.mhp//2):
+                slowprint(f"{troll1.namn} använder sin special och tar 50 hp från dig!")
+                klass.hp -= 50
+                troll1.special -= 1
+                troll1.hp += 50
             försvar = r.randint(0,klass.int)
             troll1_int = r.randint(0,troll1.int)
             if troll1_int>försvar:
