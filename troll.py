@@ -5,7 +5,7 @@ from levelup import  *
 from slowtypeshii import slowprint
 from rensa import rensa
 
-monster_namn = ["Gruk, förstöraren","Grubb", "Gnorp", "Greg", "Zarg", "Snorre",  ]
+monster_namn = ["Gruk, förstöraren","Grubb", "Gnorp", "Greg", "Zarg", "Snorre","Grippy", "Knorp" ]
 class fiende:
     def __init__ (self,namn = None):
         self.namn = namn if namn else r.choice(monster_namn)
@@ -35,15 +35,17 @@ class fiende:
             self.hp = 60
             self.int = 70
         elif namn == "Gruk, förstöraren":
-            self.atk = 50
-            self.mhp = 200
-            self.hp = 200
-            self.int = 50
+            self.atk = 75
+            self.mhp = 350
+            self.hp = 350
+            self.int = 70
+            self.special = 1
         elif namn == "Monkel Tronkel III":
             self.atk = 75
             self.mhp = 500
             self.hp = 500
             self.int = 20000
+            self.special = 3
         elif namn == "Slutgiltiga Monkel":
             self.atk = 100000000000000
             self.mhp = 100000000000000
@@ -56,8 +58,9 @@ class fiende:
             self.int = r.randint(5,50)
 def flerastrid(a,b,c):
     i_strid = True
+    flychans = [0,1,2,3,4,5]
     antal_troll = 3
-    slowprint(f"System: Du möter {antal_troll} stycket troll!")
+    slowprint(f"Du möter {antal_troll} stycket troll!")
     troll_nr1 = fiende(a)
     troll_nr2 = fiende(b)
     troll_nr3 = fiende(c)
@@ -66,22 +69,26 @@ def flerastrid(a,b,c):
 2. {troll_nr2.namn}
 3. {troll_nr3.namn}""")
     while antal_troll>0 and klass.hp>0 and i_strid:
-        slowprint(f"System: Du har {klass.hp} hp kvar!")
+        slowprint(f"Du har {klass.hp} hp kvar!")
         if  klass.hp <= 10:
-            slowprint("System: Din hälsa är låg, vill du fly?")
-            slowprint("System: Skriv j för ja, n för nej ---> ")
+            slowprint("Din hälsa är låg, vill du fly?")
+            slowprint("Skriv j för ja, n för nej ---> ")
             flykt = input()
             if flykt == "j":
-                slowprint("System: Du flyr från striden!")
-                if klassval == "3":
-                    slowprint("System: Du förlorar all din aura för att du flyr!")
-                    klass.stk = 0
-                i_strid = False
-                break
+                if r.choice(flychans) == 0 or r.choice(flychans) == 1 or r.choice(flychans) == 2:
+                    slowprint("Du lyckas fly från striden!")
+                    i_strid = False
+                    if klassval == "3":
+                        slowprint("Du förlorar all din aura för att du flyr!")
+                        klass.stk = 0
+                    break
+                else:
+                    slowprint("Du misslyckas med att fly!")
+                
             else:
-                slowprint("System: Du väljer att stanna och slåss!")
+                slowprint("Du väljer att stanna och slåss!")
         if klassval == "2":
-            slowprint(f"System: Trollen tar {klass.stk} skada av din stank!")
+            slowprint(f"Trollen tar {klass.stk} skada av din stank!")
             if troll_nr1.hp>0:
                 troll_nr1.hp -= klass.stk
             if troll_nr2.hp>0:
@@ -89,15 +96,15 @@ def flerastrid(a,b,c):
             if troll_nr3.hp>0:    
                 troll_nr3.hp -= klass.stk
             if troll_nr1.hp <= 0:
-                slowprint(f"System: Du har dödat {troll_nr1.namn} med din stank!")
+                slowprint(f"Du har dödat {troll_nr1.namn} med din stank!")
                 antal_troll -= 1
             elif troll_nr2.hp <= 0:
-                slowprint(f"System: Du har dödat {troll_nr2.namn} med din stank!")
+                slowprint(f"Du har dödat {troll_nr2.namn} med din stank!")
                 antal_troll -= 1
             elif troll_nr3.hp <= 0:
-                slowprint(f"System: Du har dödat {troll_nr3.namn} med din stank!")
+                slowprint(f"Du har dödat {troll_nr3.namn} med din stank!")
                 antal_troll -= 1
-        slowprint(f"System: Vilket troll vill du slåss mot?")
+        slowprint(f"Vilket troll vill du slåss mot?")
         for i in range (1,4):
             if i ==1 and troll_nr1.hp>0:
                 slowprint(f"{i}. {troll_nr1.namn} (hp: {troll_nr1.hp})")
@@ -108,7 +115,7 @@ def flerastrid(a,b,c):
         slowprint("a. Attackera alla troll")
         val = input("---> ")
         if val == "1" and troll_nr1.hp>0:
-            slowprint(f"""System: Använder du attackera eller utsmarta {troll_nr1.namn}? 
+            slowprint(f"""Använder du attackera eller utsmarta {troll_nr1.namn}? 
 Trollet har statsen atk: {troll_nr1.atk}, int: {troll_nr1.int}. a för attackera, u för utsmarta---> """)
             aval = input()
             if aval == "a":
@@ -118,12 +125,12 @@ Trollet har statsen atk: {troll_nr1.atk}, int: {troll_nr1.int}. a för attackera
                     skada = din_skada - troll1_försvar
                     troll_nr1.hp -= skada
                     if troll_nr1.hp <= 0:
-                        slowprint(f"System: Du har dödat {troll_nr1.namn}!")
+                        slowprint(f"Du har dödat {troll_nr1.namn}!")
                         antal_troll -= 1
                         continue
-                    slowprint(f"""System: Du träffar {troll_nr1.namn} och gör {skada} skada!""")
+                    slowprint(f"""Du träffar {troll_nr1.namn} och gör {skada} skada!""")
                 else:
-                    slowprint("System: Du missar din attack!")
+                    slowprint("Du missar din attack!")
             elif aval == "u":
                 din_skada = r.randint(0,klass.int)
                 troll1_försvar = r.randint(0,troll_nr1.int)
@@ -131,14 +138,14 @@ Trollet har statsen atk: {troll_nr1.atk}, int: {troll_nr1.int}. a för attackera
                     skada = din_skada - troll1_försvar
                     troll_nr1.hp -= skada
                     if troll_nr1.hp <= 0:
-                        slowprint(f"System: Du har dödat {troll_nr1.namn}!")
+                        slowprint(f"Du har dödat {troll_nr1.namn}!")
                         antal_troll -= 1
                         continue
-                    slowprint(f"""System: Du utsmartar {troll_nr1.namn} och gör {skada} skada!""")
+                    slowprint(f"""Du utsmartar {troll_nr1.namn} och gör {skada} skada!""")
                 else:
-                    slowprint("System: Du misslyckas med att utsmarta trollet!")
+                    slowprint("Du misslyckas med att utsmarta trollet!")
         elif val == "2" and troll_nr2.hp>0:
-            slowprint(f"""System: Använder du attackera eller utsmarta {troll_nr2.namn}?
+            slowprint(f"""Använder du attackera eller utsmarta {troll_nr2.namn}?
 Trollet har statsen atk: {troll_nr2.atk}, int: {troll_nr2.int}. a för attackera, u för utsmarta---> """)
             aval = input()
             if aval == "a":
@@ -148,12 +155,12 @@ Trollet har statsen atk: {troll_nr2.atk}, int: {troll_nr2.int}. a för attackera
                     skada = din_skada - troll2_försvar
                     troll_nr2.hp -= skada
                     if troll_nr2.hp <= 0:
-                        slowprint(f"System: Du har dödat {troll_nr2.namn}!")
+                        slowprint(f"Du har dödat {troll_nr2.namn}!")
                         antal_troll -= 1
                         continue
-                    slowprint(f"""System: Du träffar {troll_nr2.namn} och gör {skada} skada!""")
+                    slowprint(f"""Du träffar {troll_nr2.namn} och gör {skada} skada!""")
                 else:
-                    slowprint("System: Du missar din attack!")
+                    slowprint("Du missar din attack!")
             elif aval == "u":
                 din_skada = r.randint(0,klass.int)
                 troll2_försvar = r.randint(0,troll_nr2.int)
@@ -161,14 +168,14 @@ Trollet har statsen atk: {troll_nr2.atk}, int: {troll_nr2.int}. a för attackera
                     skada = din_skada - troll2_försvar
                     troll_nr2.hp -= skada
                     if troll_nr2.hp <= 0:
-                        slowprint(f"System: Du har dödat {troll_nr2.namn}!")
+                        slowprint(f"Du har dödat {troll_nr2.namn}!")
                         antal_troll -= 1
                         continue
-                    slowprint(f"""System: Du utsmartar {troll_nr2.namn} och gör {skada} skada!""")
+                    slowprint(f"""Du utsmartar {troll_nr2.namn} och gör {skada} skada!""")
                 else:
-                    slowprint("System: Du misslyckas med att utsmarta trollet!")
+                    slowprint("Du misslyckas med att utsmarta trollet!")
         elif val == "3" and troll_nr3.hp>0:
-            slowprint(f"""System: Använder du attackera eller utsmarta {troll_nr3.namn}?
+            slowprint(f"""Använder du attackera eller utsmarta {troll_nr3.namn}?
 Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera, u för utsmarta---> """)
             aval = input()
             if aval == "a":
@@ -178,12 +185,12 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                     skada = din_skada - troll3_försvar
                     troll_nr3.hp -= skada
                     if troll_nr3.hp <= 0:
-                        slowprint(f"System: Du har dödat {troll_nr3.namn}!")
+                        slowprint(f"Du har dödat {troll_nr3.namn}!")
                         antal_troll -= 1
                         continue
-                    slowprint(f"""System: Du träffar {troll_nr3.namn} och gör {skada} skada!""")
+                    slowprint(f"""Du träffar {troll_nr3.namn} och gör {skada} skada!""")
                 else:
-                    slowprint("System: Du missar din attack!")
+                    slowprint("Du missar din attack!")
             elif aval == "u":
                 din_skada = r.randint(0,klass.int)
                 troll3_försvar = r.randint(0,troll_nr3.int)
@@ -191,14 +198,14 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                     skada = din_skada - troll3_försvar
                     troll_nr3.hp -= skada
                     if troll_nr3.hp <= 0:
-                        slowprint(f"System: Du har dödat {troll_nr3.namn}!")
+                        slowprint(f"Du har dödat {troll_nr3.namn}!")
                         antal_troll -= 1
                         continue
-                    slowprint(f"""System: Du utsmartar {troll_nr3.namn} och gör {skada} skada!""")
+                    slowprint(f"""Du utsmartar {troll_nr3.namn} och gör {skada} skada!""")
                 else:
-                    slowprint("System: Du misslyckas med att utsmarta trollet!")
+                    slowprint("Du misslyckas med att utsmarta trollet!")
         elif val == "a":
-            slowprint("System: Använder du attackera eller utsmarta alla troll? a för attackera, u för utsmarta---> ")
+            slowprint("Använder du attackera eller utsmarta alla troll? a för attackera, u för utsmarta---> ")
             fval = input()
             if fval == "a":
                 din_skada = r.randint(0,klass.atk)
@@ -208,26 +215,26 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                     if troll_nr1.hp>0:
                         troll_nr1.hp -= skada
                         if troll_nr1.hp <= 0:
-                            slowprint(f"System: Du har dödat {troll_nr1.namn}!")
+                            slowprint(f"Du har dödat {troll_nr1.namn}!")
                             antal_troll -= 1
                         else:
-                            slowprint(f"System: Du gör {skada} skada på {troll_nr1.namn}!")
+                            slowprint(f"Du gör {skada} skada på {troll_nr1.namn}!")
                     if troll_nr2.hp>0:
                         troll_nr2.hp -= skada
                         if troll_nr2.hp <= 0:
-                            slowprint(f"System: Du har dödat {troll_nr2.namn}!")
+                            slowprint(f"Du har dödat {troll_nr2.namn}!")
                             antal_troll -= 1
                         else:
-                            slowprint(f"System: Du gör {skada} skada på {troll_nr2.namn}!")
+                            slowprint(f"Du gör {skada} skada på {troll_nr2.namn}!")
                     if troll_nr3.hp>0:
                         troll_nr3.hp -= skada
                         if troll_nr3.hp <= 0:
-                            slowprint(f"System: Du har dödat {troll_nr3.namn}!")
+                            slowprint(f"Du har dödat {troll_nr3.namn}!")
                             antal_troll -= 1
                         else:
-                            slowprint(f"System: Du gör {skada} skada på {troll_nr3.namn}!")
+                            slowprint(f"Du gör {skada} skada på {troll_nr3.namn}!")
                 else:
-                    slowprint("System: Du missar din attack!")
+                    slowprint("Du missar din attack!")
             elif fval == "u":
                 din_skada = r.randint(0,klass.int)
                 troll_försvar = r.randint(0,troll_nr1.int + troll_nr2.int + troll_nr3.int)
@@ -236,26 +243,26 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                     if troll_nr1.hp>0:
                         troll_nr1.hp -= skada
                         if troll_nr1.hp <= 0:
-                            slowprint(f"System: Du har dödat {troll_nr1.namn}!")
+                            slowprint(f"Du har dödat {troll_nr1.namn}!")
                             antal_troll -= 1
                         else:
-                            slowprint(f"System: Du gör {skada} skada på {troll_nr1.namn}!")
+                            slowprint(f"Du gör {skada} skada på {troll_nr1.namn}!")
                     if troll_nr2.hp>0:
                         troll_nr2.hp -= skada
                         if troll_nr2.hp <= 0:
-                            slowprint(f"System: Du har dödat {troll_nr2.namn}!")
+                            slowprint(f"Du har dödat {troll_nr2.namn}!")
                             antal_troll -= 1
                         else:
-                            slowprint(f"System: Du gör {skada} skada på {troll_nr2.namn}!")
+                            slowprint(f"Du gör {skada} skada på {troll_nr2.namn}!")
                     if troll_nr3.hp>0:
                         troll_nr3.hp -= skada
                         if troll_nr3.hp <= 0:
-                            slowprint(f"System: Du har dödat {troll_nr3.namn}!")
+                            slowprint(f"Du har dödat {troll_nr3.namn}!")
                             antal_troll -= 1
                         else:
-                            slowprint(f"System: Du gör {skada} skada på {troll_nr3.namn}!")
+                            slowprint(f"Du gör {skada} skada på {troll_nr3.namn}!")
         else:
-            slowprint("System: Välj ett giltigt alternativ!")
+            slowprint("Välj ett giltigt alternativ!")
         trolltur = True
         while trolltur:
             Troll_attack = r.randint(1,3)
@@ -267,14 +274,14 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                     if troll1_atk>försvar:
                         skada = troll1_atk - försvar
                         klass.hp -= skada
-                        slowprint(f"System: {troll_nr1.namn} attackerar dig och gör {skada} skada!")
+                        slowprint(f"{troll_nr1.namn} attackerar dig och gör {skada} skada!")
                     else:
-                        slowprint(f"System: {troll_nr1.namn} missar sin attack!")
+                        slowprint(f"{troll_nr1.namn} missar sin attack!")
                 else:
                     if troll1_int>försvar:
                         skada = troll1_int - försvar
                         klass.hp -= skada
-                        slowprint(f"System: {troll_nr1.namn} utsmartar dig och gör {skada} skada!")
+                        slowprint(f"{troll_nr1.namn} utsmartar dig och gör {skada} skada!")
                 trolltur = False
             elif Troll_attack == 2 and troll_nr2.hp>0:
                 försvar = r.randint(0,klass.atk)
@@ -284,14 +291,14 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                     if troll2_atk>försvar:
                         skada = troll2_atk - försvar
                         klass.hp -= skada
-                        slowprint(f"System: {troll_nr2.namn} attackerar dig och gör {skada} skada!")
+                        slowprint(f"{troll_nr2.namn} attackerar dig och gör {skada} skada!")
                     else:
-                        slowprint(f"System: {troll_nr2.namn} missar sin attack!")
+                        slowprint(f"{troll_nr2.namn} missar sin attack!")
                 else:
                     if troll2_int>försvar:
                         skada = troll2_int - försvar
                         klass.hp -= skada
-                        slowprint(f"System: {troll_nr2.namn} utsmartar dig och gör {skada} skada!")
+                        slowprint(f"{troll_nr2.namn} utsmartar dig och gör {skada} skada!")
                 trolltur = False
             elif Troll_attack == 3 and troll_nr3.hp>0:
                 försvar = r.randint(0,klass.atk)
@@ -301,18 +308,18 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                     if troll3_atk>försvar:
                         skada = troll3_atk - försvar
                         klass.hp -= skada
-                        slowprint(f"System: {troll_nr3.namn} attackerar dig och gör {skada} skada!")
+                        slowprint(f"{troll_nr3.namn} attackerar dig och gör {skada} skada!")
                     else:
-                        slowprint(f"System: {troll_nr3.namn} missar sin attack!")
+                        slowprint(f"{troll_nr3.namn} missar sin attack!")
                 else:
                     if troll3_int>försvar:
                         skada = troll3_int - försvar
                         klass.hp -= skada
-                        slowprint(f"System: {troll_nr3.namn} utsmartar dig och gör {skada} skada!")
+                        slowprint(f"{troll_nr3.namn} utsmartar dig och gör {skada} skada!")
                 trolltur = False
         rensa()
     if antal_troll == 0:
-        slowprint(f"System: Du har besegrat alla trollen! Du  tjänar exp för varje troll du dödade. Totalt får du {troll_nr1.mhp + troll_nr2.mhp + troll_nr3.mhp} exp!")
+        slowprint(f"Du har besegrat alla trollen! Du  tjänar exp för varje troll du dödade. Totalt får du {troll_nr1.mhp + troll_nr2.mhp + troll_nr3.mhp} exp!")
         klass.exp += troll_nr1.mhp + troll_nr2.mhp + troll_nr3.mhp
         threshold = int(100 * (1.1 ** klass.lvl))
         while klass.exp >= threshold:
@@ -320,37 +327,42 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
             levelup()
             threshold = int(100 * (1.1 ** klass.lvl))
         if  klassval == "3":
-            slowprint("System: Du vann striden, så du tjänar 15 aura,eftersom det var en 3v1!")
+            slowprint("Du vann striden, så du tjänar 15 aura,eftersom det var en 3v1!")
             klass.stk += 15
+        rensa()
+    elif klass.hp<=0:
+        slowprint("Du dog... Åva kommer nu gå under av trollens framafart...")
+        levande = False
+        return levande
 def singelstrid(a):
     i_strid = True
     troll1 = fiende(a)
-    slowprint(f"""System: Du stöter på ett troll: {troll1.namn}!!!!
+    slowprint(f"""Du stöter på ett troll: {troll1.namn}!!!!
           Den har {troll1.atk} attack, {troll1.hp} hälsa och {troll1.int} intelligens!!
           """)
     print(f"Din attack är {klass.atk}")
     while troll1.hp>0 and klass.hp>0 and i_strid:
-        slowprint(f"System: Du har {klass.hp} hp kvar!")
+        slowprint(f"Du har {klass.hp} hp kvar!")
         if  klass.hp <= 10:
-            slowprint("System: Din hälsa är låg, vill du fly?")
-            slowprint("System: Skriv j för ja, n för nej ---> ")
+            slowprint("Din hälsa är låg, vill du fly?")
+            slowprint("Skriv j för ja, n för nej ---> ")
             flykt = input()
             if flykt == "j":
-                slowprint("System: Du flyr från striden!")
+                slowprint("Du flyr från striden!")
                 if klassval == "3":
-                    slowprint("System: Du förlorar all din aura för att du flyr!")
+                    slowprint("Du förlorar all din aura för att du flyr!")
                     klass.stk = 0
                 i_strid = False
                 break
             else:
-                slowprint("System: Du väljer att stanna och slåss!")
+                slowprint("Du väljer att stanna och slåss!")
         if klassval == "2":
             slowprint(f"{troll1.namn} tar {klass.stk} skada av din stank!")
             troll1.hp -= klass.stk
             if troll1.hp <= 0:
                 slowprint(f"{troll1.namn} dör av din stank!")
                 break
-        slowprint("""System: Vad vill du göra?
+        slowprint("""Vad vill du göra?
 1. Attackera  (atk)
 2. Kolla säcken
 3. Utsmarta   (int)""")
@@ -364,10 +376,10 @@ def singelstrid(a):
                 if troll1.hp <= 0:
                     slowprint(f"{troll1.namn} dör av din tuffa attack!")
                     break
-                slowprint(f"System: Du slår hårt mot {troll1.namn}, den träffar!")
+                slowprint(f"Du slår hårt mot {troll1.namn}, den träffar!")
                 slowprint(f"Du gör {skada} skada, så {troll1.namn} har {troll1.hp} hälsa kvar!")
             else:
-                slowprint("System: Du missar din attack!")
+                slowprint("Du missar din attack!")
         elif stridval == "2":
             öppna_säckfan()
         elif stridval == "3":
@@ -379,32 +391,37 @@ def singelstrid(a):
                 if troll1.hp <= 0:
                     slowprint(f"{troll1.namn} dör av din hjärnkraft!")
                     break
-                slowprint(f"System: Du utsmartar {troll1.namn} och gör {skada} skada!")
+                slowprint(f"Du utsmartar {troll1.namn} och gör {skada} skada!")
                 slowprint(f"nu har {troll1.namn} {troll1.hp} hälsa kvar!")
             else:
-                slowprint("System: Du misslyckas med att utsmarta trollet!")
+                slowprint("Du misslyckas med att utsmarta trollet!")
         if troll1.atk>troll1.int:
+            if troll1.namn == troll1.special >0 and troll1.hp < (troll1.mhp//2):
+                slowprint(f"{troll1.namn} använder sin special och tar 50 hp från dig!")
+                klass.hp -= 50
+                troll1.special -= 1
+                troll1.hp += 50
             försvar = r.randint(0,klass.atk)
             troll1_atk = r.randint(0,troll1.atk)
             if troll1_atk>försvar:
                 skada = troll1_atk - försvar
                 klass.hp -= skada
-                slowprint(f"System: {troll1.namn} attackerar dig och gör {skada} skada!")
+                slowprint(f"{troll1.namn} attackerar dig och gör {skada} skada!")
             else:
-                slowprint(f"System: {troll1.namn} missar sin attack!")
+                slowprint(f"{troll1.namn} missar sin attack!")
         else:
             försvar = r.randint(0,klass.int)
             troll1_int = r.randint(0,troll1.int)
             if troll1_int>försvar:
                 skada = troll1_int - försvar
                 klass.hp -= skada
-                slowprint(f"System: {troll1.namn} utsmartar dig och gör {skada} skada!")
+                slowprint(f"{troll1.namn} utsmartar dig och gör {skada} skada!")
             else:
-                slowprint(f"System: {troll1.namn} misslyckas med att utsmarta dig!")
+                slowprint(f"{troll1.namn} misslyckas med att utsmarta dig!")
         rensa()
 
     if troll1.hp <= 0:
-        slowprint(f"System: {troll1.namn} dog och du får {troll1.mhp} exp! ")
+        slowprint(f"{troll1.namn} dog och du får {troll1.mhp} exp! ")
         klass.exp += troll1.mhp
         threshold = int(100 * (1.1 ** klass.lvl))
         while klass.exp >= threshold:
@@ -412,7 +429,11 @@ def singelstrid(a):
             levelup()
             threshold = int(100 * (1.1 ** klass.lvl))
         rensa()
+    elif klass.hp<=0:
+        slowprint("Du dog... Åva kommer nu gå under av trollens framafart...")
+        levande = False
+        return levande
     if klassval == "3" and troll1.hp <= 0:
-        slowprint("System: Du vann striden, så du tjänar 5 aura!")
+        slowprint("Du vann striden, så du tjänar 5 aura!")
         klass.stk += 5
         rensa()

@@ -49,7 +49,7 @@ while not klas:
         klas = True
 
     else:
-        slowprint("System: Välj ett av alternativen tack :)")
+        slowprint("Välj ett av alternativen tack :)")
 
 
 
