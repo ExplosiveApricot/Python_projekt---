@@ -29,8 +29,62 @@ Efter att ha gått nedför trappan öppnas äntligen vyn framför dig. Där du n
 Långt borta ser du  en enorm byggnad, som förmodligen är där kungen finns. 
 Det är dags.""")
     input("Tryck enter för att fortsätta...")
+    rensa()
     slowprint("""
 Du börjar din vandring, stanken blir starkare och starkare för varje steg du tar.""")
+    input("Tryck enter för att fortsätta...")
+    rensa()
+    slowprint("""
+Men helt plötsligt, känner du ett andetag på din nacke...
+Det är Gruk, förstöraren!""")
+    input("Tryck enter för att fortsätta...")
+    rensa()
+    singelstrid("Gruk, förstöraren")
+    slowprint("""
+Efter en hårdkamp står du nu segrare över Gruk, 
+men det kommer säkert dra till sig en hel del uppmärksamhet.
+Du måste skynda dig till kungens slott innan allt är för sent!""")
+    input("Tryck enter för att fortsätta...")
+    rensa()
+    slowprint("""
+Du kommer allt närmare slottet, men utanför portarna står det tre troll! 
+Du måste in så en strid är oundviklig...""")
+    input("Tryck enter för att fortsätta...")
+    rensa()
+    flerastrid("Trollvakt","Trollvakt","Trollvakt")
+    slowprint("""När du besegrade fienderna ser du att porten är låst""")
+    input("Tryck enter för att fortsätta...")
+    slowprint("""Någon i hög rang borde ha en nyckel, en general kanske?
+Du kollar runtomkring och ser en stor byggnad som nära intill slottet. 
+Utanför står det en skylt där det står med stora bokstäver:TROLLENS FÖRSVARSMAKT
+Här finns det säkert en general!""")
+    input("Tryck enter för att fortsätta...")
+    rensa()
+    slowprint("""
+Du smyger långsamt in i byggnaden, och du ser tre fiender framför dig.
+Två ser ut som vakterna du mötte tidigare, och en ser starkare ut...
+Det är nog generalen!
+Dags för strid igen...""")
+    input("tryck enter för att fortsätta...")
+    rensa()
+    slowprint("""
+Generalen: Va! Vem är du?! Vakter, till attack!""")
+    flerastrid("Trollsoldat","Trollgeneral","Trollsoldat")
+    slowprint("""
+Du lyckades besegra trollen, och ser en nyckel ligga bredvid den fallna generalen.
+Du tar nyckeln och skyndar dig tillbaka till slottet.""")
+    input("Tryck enter för att fortsätta...")
+    slowprint("""När du väl öppnar porten med nyckeln känner du ännu mera stank...
+Framför dig ser du tillslut dörren till kungens tronrum. 
+Men framför dörren står två enorma vakter, 
+och en liten figur som är Gregg dem listige, kungens rådgivare""")
+    input("Tryck enter för att fortsätta...")
+    rensa()
+    flerastrid("Trollvakt","Gregg den listige","Trollvakt")
+    slowprint("""
+Du lyckades besegra vakterna och Gregg, och skyndar in i tronsalen där kungen väntar...""")
+    input("Tryck enter för att fortsätta...")
+    rensa()
 
-            
-        
+
+fas_1()

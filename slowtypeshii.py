@@ -1,12 +1,10 @@
 import time
 import sys
 
-def slowprint(*args, sep=' ', end='\n', delay=0.04):
+def slowprint(text, end='\n', delay=0):
     """långsam utskrift av text till konsolen"""
-    text = sep.join(str(a) for a in args)
+    text = str(text)
     for ch in text:
-        sys.stdout.write(ch)
-        sys.stdout.flush()
+        print(ch, end ='')
         time.sleep(delay)
-    sys.stdout.write(end)
-    sys.stdout.flush()
+    print(end, end='')

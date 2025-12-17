@@ -45,22 +45,42 @@ class fiende:
             self.hp = 350
             self.int = 70
             self.special = 1
+        elif namn == "Trollvakt":
+            self.atk = 100
+            self.mhp = 100
+            self.hp = 100
+            self.int = 100
+            self.special = 0
+        elif namn == "Trollgeneral":
+            self.atk = 150
+            self.mhp = 200
+            self.hp = 200
+            self.int = 150
+            self.special = 1
+        elif namn == "Kungens väktare":
+            self.atk = 200
+            self.mhp = 300
+            self.hp = 300
+            self.int = 200
+            self.special = 1
+        elif namn == "Gregg den listige":
+            self.atk = 50
+            self.mhp = 400
+            self.hp = 400
+            self.int = 200
+            self.special = 1
         elif namn == "Monkel Tronkel III":
-            self.atk = 75
+            self.atk = 150
             self.mhp = 500
             self.hp = 500
-            self.int = 20000
-            self.special = 3
-        elif namn == "Slutgiltiga Monkel":
-            self.atk = 100000000000000
-            self.mhp = 100000000000000
-            self.hp = 100000000000000
-            self.int = 100000000000000
+            self.int = 2000
+            self.special = 2
         else:
             self.atk = r.randint(1,20)
             self.mhp = r.randint(20,200)
             self.hp = self.mhp
             self.int = r.randint(5,50)
+            self.special = 0
 def flerastrid(a,b,c):
     i_strid = True
     flychans = [0,1,2,3,4,5]
@@ -297,7 +317,7 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                 försvar = r.randint(0,klass.atk)
                 troll2_atk = r.randint(0,troll_nr2.atk)
                 troll2_int = r.randint(0,troll_nr2.int)
-                if troll_nr1.special > 0 and troll_nr2.hp < (troll_nr2.mhp//2):
+                if troll_nr2.special > 0 and troll_nr2.hp < (troll_nr2.mhp//2):
                     slowprint(f"{troll_nr2.namn} använder sin special och tar 50 hp från dig!")
                     klass.hp -= 50
                     troll_nr2.special -= 1

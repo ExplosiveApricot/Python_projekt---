@@ -5,147 +5,87 @@ from troll import *
 from slowtypeshii import slowprint
 
 def trollhättan_final_boss():
+    slowprint("""
+Stanken är outhärdlig när du kliver in i tronsalen.
+Kungen sitter framför dig på en tron gjord av ben.
+Han reser sig upp, skrattandes.
+Du står framför den enda Monkel Tronkel den 3:e, Kungen över alla troll!""")
+    input("Tryck enter för att fortsätta...")
+    rensa()
+    slowprint("""
+Monkel Tronkel: Ha ha ha! Så du är den meslige människan som tog sig igenom alla mina soldater, jag måste säga att jag är imponerad.
+                Men du kommer aldrig att besegra mig, för jag är inte som mina soldater, jag är en gud bland troll!
+                Nu är det dags för ditt äventyr att ta slut!""")
+    input("Tryck enter för att fortsätta...")
+    rensa()
+    fas_1()
+
+def fas_1():
+    # klass.exp += 1000 
+    # kant = 100* (1.1)**klass.lvl
+    # while klass.exp>kant:
+    #     klass.exp-=kant
+    #     levelup()
+    #     kant = 100* (1.1)**klass.lvl
+    slowprint("En strid bryter ut!")
+    boss = fiende("Monkel Tronkel III")
     i=0
-    Monkel = fiende("Monkel Tronkel III")
-    slowprint("""
-Du känner stank från alla vinklar, men den börjar bli starkare varje steg du tar, tills en gigantisk figur dyker upp i din synvinkel
-        Framför dig står den fetaste varelsen du någonsin sett, kungen av Trollhättan, Monkel Tronkel den 3:e.
-Monkel: Vilken svag människa står framför mig?""")
-    namn =  input("Kanske är dags att säga ditt namn --->")
-    slowprint(f"""
-Monkel: {namn} alltså. 
-han ställer sig upp, marken vibrerar
-Monkel: Dags att dö människa
-En strid bryter ut! Monkel har {Monkel.atk} skada, {Monkel.hp} hälsa och {Monkel.int} intelligens!""")
-    while Monkel.hp>0 and klass.hp>0:
-        i+=1
-        if klassval == "2":
-            slowprint("Du stinker! Men Monkel tar ingen skada av det...")
-            slowprint("Men du är också immun mot hans stank!")
+    slowprint("Monkel: Du kommer aldrig att lyckas!")
+    salt = 3
+    while boss.hp>0 and klass.hp>0 and i<=5:
+        if klass.mhp-5<klass.hp:
+            klass.hp = klass.hp - (klass.mhp-klass.hp)
+            klass.mhp -= 5
         else:
-            slowprint("Stanken borrar in sig i dina näsborrar, du tappar 1 max hp")
-        if klass.hp == klass.mhp:
-            klass.mhp-=1
-            klass.hp-=1
-        else:
-            klass.mhp-=1
-
+            klass.mhp -= 5
         slowprint("""
-Du känner din drivkraft stärker dina attacker. Allt hänger på detta, vad vill du göra? 
+Monkel stinker och du tappar 5 max hp!
+Monkel verkar ladda upp en stark attack...
+Vad vill du göra?
 1. Attackera
-2. Inventory
-3. Utsmarta """)
-        viktigt_val = input("---> ")
-
-        if viktigt_val=="1":
-            viktig_skada = r.randint(0,klass.atk)
-            monkel_skada = r.randint(0,Monkel.atk)
-            if viktig_skada>=monkel_skada:
-                skada = viktig_skada+10-monkel_skada
-                if skada>=Monkel.hp:
-                    Monkel.hp=0
-                else:    
-                    Monkel.hp -= skada
-                slowprint(f"""
-Din attack träffar Monkel och han tar {skada} skada!!
-        han har nu {Monkel.hp} hp kvar!""")
-
-            else:
-                skada = monkel_skada-viktig_skada
-                klass.hp -=skada
-                slowprint(f""" 
-System:Du på något sätt missar den fetaste varelsen någonsin och tar {skada} skada.
-Bara {klass.hp} hp kvar!
-""")
-        elif viktigt_val == "2":
-            öppna_säckfan()
-            if "Konstigt mynt" in ryggsäck:
-                Monkel.hp=0
-                slowprint(""" 
-När du öppnar din ryggsäck händer något konstigt. 
-        Myntet, som du fick av Nikodemus, börjar glöda till, och Monkel faller ihop på plats""")
-        elif viktigt_val == "3":
-            slowprint("""
-Är du helt dum???? 
-        Han har 20 000 intelligens! 
-        Det är ju bara självmord och jämföra dina stats med hans!!!""")
-    if Monkel.hp ==0:
-        slowprint("""
-Striden pågår i vad som känns i en evighet, men tillslut  faller Monkel ihop. 
-        Du har vunnit!
-        Eller?""")
-        klass.mhp += i
-        klass.hp = klass.mhp
-
-
-
-def fas_två():
-    svagpunkt = False
-    slowprint("""
-Monkel: Trodde du verkligen att du hade besegrat mig?!?! 
-        Du är bara en mesig människa, du kommer aldrig lyckas!!!!!""")
-    Monkel2 = fiende("Slutgiltiga Monkel")
-    slowprint(f"""
-Du stöter på Monkel en andra gång! 
-        Han har statsen {Monkel2.hp} häsla, {Monkel2.atk} attack och {Monkel2.int} intelligens...
-        """)
-    while not svagpunkt and klass.hp>0:
-        slowprint("Monkel stinker ännu mer nu, du tappar 20 max hp!")
-        if klass.hp+20>klass.mhp:
-            klass.hp -= klass.mhp-klass.hp
-            klass.mhp -= 20
-        slowprint("""
-Vad vill du göra? 
-1. Attackera 
-2. Öppna ryggsäck 
-3. Utsmarta 
-4. Leta efter svagheter """)
-        vval2 = input("----> ")
-        if vval2 == "1":
-            slowprint("""
-Det där är nog inte en bra idé...""")
-        elif vval2 == "2":
-            öppna_säckfan()
-            slowprint("Det verkar inte finnas något av användning...")
-        elif vval2 == "3":
-            slowprint("""
-Det  där är nog inte en bra idé...""")
-        elif vval2 == "4":
-            slowprint(""" 
-Vad ska vi göra? Att slåss är ur bilden
-    1.Kolla fötter
-    2.Kolla mage 
-    3.Kolla armar 
-    4.Kolla hals
-    5.Kolla ansikte""")
-            inspaning = input("---> ")
-            if inspaning == "1":
-                slowprint("""
-Din fotfetish får dig att kolla på hans stinkande fötter. Inget speciellt kommer till tanke""")
-            elif inspaning == "2":
-                slowprint("""
-Det enda du ser är otroligt mycket fläsk""")
-            elif inspaning == "3":
-                slowprint("""
-Du ser inget viktigt""")
-            elif inspaning == "4":
-                slowprint(""" 
-Det ser ut som han har en kristall runt ett smycke! Det är säkert viktigt! Ta det!
-        När du tar tag i smycket kommer ett otroligt ljus upp, och Monkel minskar i storlek, nu lika stor som du
-Monkel: Nej!!! Vad har du gjort!!! Du tog min rätt till tronen!!!
-Denna kristall ger dig alltså  makten att regera över trollhättan, vill du sätta på den? y/n""")
-                regera_eller_ej = input("---> ")
-                if regera_eller_ej == "y" or regera_eller_ej == "Y":
-                    slowprint("Du tar på dig kristallen, men kraften är för mycket för att hantera. Du dör på fläcken.")
-                    klass.hp = 0
+2. Kolla ryggsäck
+3. Ta skydd""")
+        vval = input("--->")
+        valt = False
+        while not valt:
+            if vval == "1":
+                attack = r.randint(0,klass.atk)
+                bförsvar =  boss.atk
+                if attack > bförsvar:
+                    skada = attack - bförsvar
+                    if skada > boss.hp:
+                        slowprint("Monkel faller ihop när du slår honom, är det över?")
+                        boss.hp = 0
+                    else:
+                        boss.hp -= skada
+                        slowprint(f"Du för {skada} skada på Monkel, han har nu {boss.hp} häsla kvar!")
                 else:
-                    slowprint("Du krossar kristallen och därmed Monkels hopp om tronen. Du räddade Åva från trollhotet! Grattis!")
-                    svagpunkt = True
+                    slowprint("Din attack går inte igenom Monkels försvar...")
+                valt = True
+            elif vval == "2":
+                öppna_säckfan()
+                Valt = True
+            elif vval == "3":
+                if i<5:
+                    slowprint("Du tar skydd, men Monkel gör inget än,han bara fortsätter ladda upp...")
+                elif i==5 and salt>0:
+                    slowprint(f"Du tar skydd och undviker Monkels superattack! Dock finns det bara {salt} skyddsalternativ kvar...")
+                    salt-=1
+                elif i==5 and salt==0:
+                    slowprint("Du försöker skygga dig men tar Monkels fulla attack, och tar 100 skada!")
+                valt= True
+            else:
+                slowprint("Välj ett alternativ tack...")
+            
+        i += 1
+        if boss.hp<boss.mhp//2 and boss.special>0:
+            boss.special -= 1
+            slowprint("Monkeltar 50 hp från dig!")
+            boss.hp += 50
+            klass.hp -= 50
+        if i==5 and vval != "3":
+            slowprint("Monkel attackerar och du tar 100 skada!!!")
+        else:
+            slowprint(f"Monkel laddar upp mer energi, det serut som han kommer attackera om {5-i} turer...")
+        
 
-singelstrid("Monkel Tronkel Jr")
-singelstrid("Blorg den korte")
-singelstrid("Gorg den fete")
-flerastrid("Monkel Tronkel Jr","Blorg den korte","Gorg den fete")
-singelstrid("Zull den mäktige")
-trollhättan_final_boss()
-fas_två()
