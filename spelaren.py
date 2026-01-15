@@ -1,7 +1,7 @@
 from slowtypeshii import slowprint
 
 class spelaren():
-    def __init__(self, atk, mhp, hp, int, stk, lvl, exp):
+    def __init__(self, atk, mhp, hp, int, stk, lvl, exp, bryggdnedräkning, boknedräkning):
         self.base_atk = atk 
         self.mhp = mhp
         self.hp = hp
@@ -9,6 +9,9 @@ class spelaren():
         self.lvl = lvl
         self.exp = exp
         self.stk = stk
+        self.bryggdnedräkning = 0
+        self.boknedräkning = 0
+
 
     @property
     def atk(self):
@@ -51,8 +54,7 @@ while not klas:
     else:
         slowprint("Välj ett av alternativen tack :)")
     
-bryggdnedräkning = 0
-boknedräkning = 0
+
 
 
 

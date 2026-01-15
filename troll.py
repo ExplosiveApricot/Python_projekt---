@@ -427,14 +427,14 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
         rensa()
     if antal_troll == 0:
         slowprint(f"Du vann striden! Du tjänar {troll_nr1.exp + troll_nr2.exp + troll_nr3.exp} exp! Och kanske ett föremål...")
-        if bryggdnedräkning > 0:
-            bryggdnedräkning -= 1
-            if bryggdnedräkning <= 0:
+        if klass.bryggdnedräkning > 0:
+            klass.bryggdnedräkning -= 1
+            if klass.bryggdnedräkning <= 0:
                 klass.atk -= 5
                 slowprint("Effekten av styrkebryggden har försvunnit och din attack minskar med 5.")
-        if boknedräkning > 0:
-            boknedräkning -= 1
-            if boknedräkning <= 0:
+        if klass.boknedräkning > 0:
+            klass.boknedräkning -= 1
+            if klass.boknedräkning <= 0:
                 klass.int -= 5
                 slowprint("Effekten av matteboken har försvunnit och din intelligens minskar med 5.")
         föremål_chans = r.randint(1,8)
@@ -447,7 +447,7 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
             slowprint("Vill du använda styrkebryggden för en tillfällig styrkeökning på 5?")
             bryggdval = input("Tryck j för ja--->")
             if bryggdval == "j":
-                bryggdnedräkning = 3
+                klass.bryggdnedräkning = 3
                 klass.atk += 5
                 slowprint("Din attack har ökat med 5!")
                 ryggsäck.remove("Styrkebryggd")
@@ -459,7 +459,7 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
             slowprint("Vill du använda matteboken för en tillfällig intelligensökning på 5?")
             bokval = input("Tryck j för ja--->")
             if bokval == "j":
-                boknedräkning = 3
+                klass.boknedräkning = 3
                 klass.int += 5
                 slowprint("Din intelligens har ökat med 5!")
                 ryggsäck.remove("Mattebok")
@@ -620,14 +620,14 @@ def singelstrid(a):
 
     if troll1.hp <= 0:
         slowprint(f"Du vann striden! Du tjänar {troll1.exp} exp! Och kanske ett föremål...")
-        if bryggdnedräkning > 0:
-            bryggdnedräkning -= 1
-            if bryggdnedräkning <= 0:
+        if klass.bryggdnedräkning > 0:
+            klass.bryggdnedräkning -= 1
+            if klass.bryggdnedräkning <= 0:
                 klass.atk -= 5
                 slowprint("Effekten av styrkebryggden har försvunnit och din attack minskar med 5.")
-        if boknedräkning > 0:
-            boknedräkning -= 1
-            if boknedräkning <= 0:
+        if klass.boknedräkning > 0:
+            klass.boknedräkning -= 1
+            if klass.boknedräkning <= 0:
                 klass.int -= 5
                 slowprint("Effekten av matteboken har försvunnit och din intelligens minskar med 5.")
         föremål_chans = r.randint(1,8)
@@ -640,7 +640,7 @@ def singelstrid(a):
             slowprint("Vill du använda styrkebryggden för en tillfällig styrkeökning på 5?")
             bryggdval = input("Tryck j för ja--->")
             if bryggdval == "j":
-                bryggdnedräkning = 3
+                klass.bryggdnedräkning = 3
                 klass.atk += 5
                 slowprint("Din attack har ökat med 5!")
                 ryggsäck.remove("Styrkebryggd")
@@ -652,7 +652,7 @@ def singelstrid(a):
             slowprint("Vill du använda matteboken för en tillfällig intelligensökning på 5?")
             bokval = input("Tryck j för ja--->")
             if bokval == "j":
-                boknedräkning = 3
+                klass.boknedräkning = 3
                 klass.int += 5
                 slowprint("Din intelligens har ökat med 5!")
                 ryggsäck.remove("Mattebok")
