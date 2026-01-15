@@ -109,13 +109,3 @@ def trollhättan():
         input("Tryck enter för att fortsätta...")
         rensa()
         trollhättan_final_boss()
-
-    
-
-klass.exp += 10000
-kant = 100* (1.1)**klass.lvl
-while klass.exp>kant:
-    klass.exp-=kant
-    levelup()
-    kant = 100* (1.1)**klass.lvl
-fas_2_strid()

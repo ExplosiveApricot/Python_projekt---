@@ -91,7 +91,6 @@ class fiende:
             self.hp = 750
             self.int = 2000
             self.special = 3
-            self.superspecial = 1
         else:
             self.atk = r.randint(1,20)
             self.mhp = r.randint(20,200)
@@ -118,7 +117,6 @@ def flerastrid(a,b,c):
             slowprint("Skriv j för ja, n för nej ---> ")
             flykt = input()
             if flykt == "j":
-                flychans = [0,1,2,3,4,5]
                 if r.choice(flychans) == 0 or r.choice(flychans) == 1 or r.choice(flychans) == 2:
                     slowprint("Du lyckas fly från striden!")
                     i_strid = False
@@ -324,7 +322,7 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                 slowprint("Vill du använda styrkebryggden för en tillfällig styrkeökning på 5?")
                 bryggdval = input("Tryck j för ja--->")
                 if bryggdval == "j":
-                    bryggdnedräkning = 3
+                    klass.bryggdnedräkning = 3
                     klass.atk += 5
                     slowprint("Din attack har ökat med 5!")
                     ryggsäck.remove("Styrkebryggd")
@@ -335,7 +333,7 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                 bokval = input("Tryck j för ja--->")
                 bokval = bokval.lower()
                 if bokval == "j":
-                    boknedräkning = 3
+                    klass.boknedräkning = 3
                     klass.int  += 5
                     slowprint("Din intelligens har ökat med 5!")
                     ryggsäck.remove("Mattebok")
@@ -358,7 +356,6 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
             slowprint("Välj ett giltigt alternativ!")
         trolltur = True
         while trolltur:
-            Troll_attack = r.randint(1,3)
             if troll_nr1.hp>0:
                 försvar = r.randint(0,klass.atk)
                 troll1_atk = r.randint(0,troll_nr1.atk)
@@ -541,7 +538,7 @@ def singelstrid(a):
                 slowprint("Vill du använda styrkebryggden för en tillfällig styrkeökning på 5?")
                 bryggdval = input("Tryck j för ja--->")
                 if bryggdval == "j":
-                    bryggdnedräkning = 3
+                    klass.bryggdnedräkning = 3
                     klass.atk += 5
                     slowprint("Din attack har ökat med 5!")
                     ryggsäck.remove("Styrkebryggd")
@@ -552,7 +549,7 @@ def singelstrid(a):
                 bokval = input("Tryck j för ja--->")
                 bokval = bokval.lower()
                 if bokval == "j":
-                    boknedräkning = 3
+                    klass.boknedräkning = 3
                     klass.int  += 5
                     slowprint("Din intelligens har ökat med 5!")
                     ryggsäck.remove("Mattebok")
