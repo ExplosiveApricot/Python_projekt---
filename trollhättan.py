@@ -7,7 +7,7 @@ from trollboss import *
 from levelup import *
 
 def trollhättan():
-    while klass.levande:
+    while klass.levande == True:
         slowprint("""
     Efter att ha tagit dig ner från den mörka våning 0 på Åva, hittar du en trappa.
     Uppför trappan lyser ett svagt grönt ljus, och det stinker något fruktansvärt
@@ -49,6 +49,8 @@ def trollhättan():
         input("Tryck enter för att fortsätta...")
         rensa()
         singelstrid("Gruk, förstöraren")
+        if not klass.levande:
+            break
         slowprint("""
     Efter en hårdkamp står du nu segrare över Gruk, 
     men det kommer säkert dra till sig en hel del uppmärksamhet.
@@ -61,6 +63,8 @@ def trollhättan():
         input("Tryck enter för att fortsätta...")
         rensa()
         flerastrid("Trollvakt","Trollvakt","Trollvakt")
+        if not klass.levande:
+            break
         slowprint("""När du besegrade fienderna ser du att porten är låst""")
         input("Tryck enter för att fortsätta...")
         slowprint("""Någon i hög rang borde ha en nyckel, en general kanske?
@@ -85,6 +89,8 @@ def trollhättan():
         slowprint("""
     Generalen: Va! Vem är du?! Vakter, till attack!""")
         flerastrid("Trollsoldat","Trollgeneral","Trollsoldat")
+        if not klass.levande:
+            break
         slowprint("""
     Du lyckades besegra trollen, och ser en nyckel ligga bredvid den fallna generalen.
     Du tar nyckeln och skyndar dig tillbaka till slottet.""")
@@ -96,6 +102,8 @@ def trollhättan():
         input("Tryck enter för att fortsätta...")
         rensa()
         flerastrid("Trollvakt","Gregg den listige","Trollvakt")
+        if not klass.levande:
+            break
         slowprint("""
     Du lyckades besegra vakterna och Gregg, och skyndar in i tronsalen där kungen väntar...""")
         input("Tryck enter för att fortsätta...")
@@ -104,9 +112,10 @@ def trollhättan():
 
     
 
-
-singelstrid("Monkel Tronkel Jr")
-singelstrid("Gorg den fete")
-singelstrid("Blorg den korte")
-flerastrid("Gorg den fete","Gorg den fete","Gorg den fete")
-trollhättan()
+klass.exp += 10000
+kant = 100* (1.1)**klass.lvl
+while klass.exp>kant:
+    klass.exp-=kant
+    levelup()
+    kant = 100* (1.1)**klass.lvl
+fas_2_strid()
