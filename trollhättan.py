@@ -7,7 +7,7 @@ from trollboss import *
 from levelup import *
 
 def trollhättan():
-    while levande:
+    while klass.levande:
         slowprint("""
     Efter att ha tagit dig ner från den mörka våning 0 på Åva, hittar du en trappa.
     Uppför trappan lyser ett svagt grönt ljus, och det stinker något fruktansvärt
@@ -48,9 +48,7 @@ def trollhättan():
     Det är Gruk, förstöraren!""")
         input("Tryck enter för att fortsätta...")
         rensa()
-        levande = singelstrid("Gruk, förstöraren")
-        if not levande:
-            return levande
+        singelstrid("Gruk, förstöraren")
         slowprint("""
     Efter en hårdkamp står du nu segrare över Gruk, 
     men det kommer säkert dra till sig en hel del uppmärksamhet.
@@ -62,9 +60,7 @@ def trollhättan():
     Du måste in så en strid är oundviklig...""")
         input("Tryck enter för att fortsätta...")
         rensa()
-        levande = flerastrid("Trollvakt","Trollvakt","Trollvakt")
-        if not levande:
-            return levande
+        flerastrid("Trollvakt","Trollvakt","Trollvakt")
         slowprint("""När du besegrade fienderna ser du att porten är låst""")
         input("Tryck enter för att fortsätta...")
         slowprint("""Någon i hög rang borde ha en nyckel, en general kanske?
@@ -88,9 +84,7 @@ def trollhättan():
         rensa()
         slowprint("""
     Generalen: Va! Vem är du?! Vakter, till attack!""")
-        levande = flerastrid("Trollsoldat","Trollgeneral","Trollsoldat")
-        if not levande:
-            return levande
+        flerastrid("Trollsoldat","Trollgeneral","Trollsoldat")
         slowprint("""
     Du lyckades besegra trollen, och ser en nyckel ligga bredvid den fallna generalen.
     Du tar nyckeln och skyndar dig tillbaka till slottet.""")
@@ -101,16 +95,13 @@ def trollhättan():
     och en liten figur som är Gregg dem listige, kungens rådgivare""")
         input("Tryck enter för att fortsätta...")
         rensa()
-        levande = flerastrid("Trollvakt","Gregg den listige","Trollvakt")
-        if not levande:
-            return levande
+        flerastrid("Trollvakt","Gregg den listige","Trollvakt")
         slowprint("""
     Du lyckades besegra vakterna och Gregg, och skyndar in i tronsalen där kungen väntar...""")
         input("Tryck enter för att fortsätta...")
         rensa()
-        levande = trollhättan_final_boss()
-        if not levande:
-            return levande
+        trollhättan_final_boss()
+
     
 
 

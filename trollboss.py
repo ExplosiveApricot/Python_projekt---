@@ -19,8 +19,9 @@ Monkel Tronkel: Ha ha ha! Så du är den meslige människan som tog sig igenom a
     input("Tryck enter för att fortsätta...")
     rensa()
     fas_1()
-    alive = fas_2()
-    return alive
+    fas_2()
+
+
 boss = fiende("Monkel Tronkel III")
 slutboss = fiende("Monkel Tronkel, gud över trollhättan")
 
@@ -149,18 +150,46 @@ Monkel har {slutboss.atk} atk, {slutboss.mhp} häsla och {slutboss.int} intellig
             slowprint("Du testar igen, men samma gröna ljus dyker upp.")
         elif vval == "2":
             öppna_säckfan()
-            if "deoderant" in ryggsäck:
-                slowprint("Monkels försvar går sönder av deon!")
-                i = 2
-                försvar = False
+            slowprint("Det kommer inte hjälpa just nu...")
         elif vval == "3":
             slowprint("Monkel står bara där, skrattandes.")
-    if not försvar:
-        fas_2_strid()
+        
     slowprint("Det verkar inte som blint attackerande inte kommer att göra något...")
     input("Tryck enter för att fortsätta...")
     rensa()
-    
+    slowprint("""
+Du måste hitta ett sätt att komma igenom Monkels försvar...
+Men hur?
+
+                         
+...
+              
+              
+...
+            
+              
+Efter att ha funderat en stund kommer du på en idé!
+""")
+    input("Tryck enter för att fortsätta...")
+    rensa()
+    slowprint("""
+Monkel stank är fruktansvärd, den har nog en förmåga att blocka attacker.
+Du måste använda dig av något som kan motverka stanken, som en deoderant!
+
+""")              
+    input("Tryck enter för att fortsätta...")
+    rensa()
+    if "Deoderant" in ryggsäck:
+        slowprint("Du använder din deoderant på Monkel!")
+        slowprint("Monkels försvar går sönder!")
+        fas_2_strid()
+    else:
+        slowprint("""
+Spelaren: Grishpojkar!!!! Ge mig en deoderant!
+
+En deo kommer flygande från himlen och träffar Monkel rakt i ansiktet!""")
+    fas_2_strid()
+
 def fas_2_strid():
     slowprint("Monkel: Imponerande, du hittade min svaghet, men det kommr bara förlänga tiden till ditt öde!!!")
     input("Tryck enter för att fortsätta...")
@@ -208,14 +237,22 @@ Vad vill du göra?
         elif vval2 == "2":
             öppna_säckfan()
             if "Deoderant" in ryggsäck:
+                slowprint("Monkel tappar hälften av sin häsla av deon!")
                 slutboss.hp = 0.5*slutboss.hp
-                slowprint("Monkels hp sänks till hälften av sitt ursprungliga värde på grund av deon!")
-                ryggsäck.remove("Deoderant")
-            elif "Livselixir" in ryggsäck and klass.mhp*0.5>klass.hp:
-                slowprint("Du använder ett livselixir och du får 100 hp!")
-                klass.hp += 100
+            if "Styrkebryggd" in ryggsäck and klass.bryggdnedräkning == 0:
+                slowprint("Din styrkebryggd ökar din attack!")
+                klass.atk += 5
+            if  "Mattebok" in ryggsäck and klass.boknedräkning == 0:
+                slowprint("Din mattebok ökar din intelligens!")
+                klass.int += 5
+            if "Guldäpple" in ryggsäck:
+                slowprint("Guldäpplet läker 50 hp!")
+                klass.hp += 50
+            if "livselixir" in ryggsäck and klass.hp < klass.mhp-25:
+                slowprint("Livselixiret läker 25 hp!")
+                klass.hp += 25
             else:
-                slowprint("Du har inget av anvöndning!")
+                slowprint("Du har inget av användning!")
         elif vval2 == "3":
             slowprint("Du skyddar inkommande attack!")
 
@@ -233,5 +270,4 @@ Hans livlösa kropp faller till marken. Du har besegrat Monkel Tronkel den III o
 """)
     elif klass.hp <=0:
         slowprint("Du dog... Åva kommer nu att gå under av trollens framfart...")
-        levande = False
-        return levande
+        klass.levande = False

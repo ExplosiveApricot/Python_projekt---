@@ -486,12 +486,9 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
             slowprint("Du vann striden, så du tjänar 15 aura,eftersom det var en 3v1!")
             klass.stk += 15
         rensa()
-        levande = True
-        return levande
     elif klass.hp<=0:
         slowprint("Du dog... Åva kommer nu gå under av trollens framafart...")
-        levande = False
-        return levande
+        klass.levande = False
 def singelstrid(a):
     i_strid = True
     troll1 = fiende(a)
@@ -681,8 +678,7 @@ def singelstrid(a):
         return levande
     elif klass.hp<=0:
         slowprint("Du dog... Åva kommer nu gå under av trollens framafart...")
-        levande = False
-        return levande
+        klass.levande = False
     if klassval == "3" and troll1.hp <= 0:
         slowprint("Du vann striden, så du tjänar 5 aura!")
         klass.stk += 5
