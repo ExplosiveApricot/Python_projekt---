@@ -15,72 +15,90 @@ class fiende:
             self.hp = 30
             self.int = 5
             self.special = 0
+            self.exp = 25
         elif namn == "Blorg den korte":
             self.atk = 5
             self.mhp = 50
             self.hp = 50
             self.int = 10
             self.special = 0
+            self.exp = 40
         elif namn == "Gorg den fete":
             self.atk = 1
             self.mhp = 150
             self.hp = 150
             self.int = 15
             self.special = 0
+            self.exp = 75
         elif namn == "Zull den mäktige":
             self.atk = 70
             self.mhp = 100
             self.hp = 100
             self.int = 10
             self.special = 0
+            self.exp = 150
         elif namn == "Throg den smarte":
             self.atk = 10
             self.mhp = 100
             self.hp = 100
             self.int = 70
             self.special = 0
+            self.exp = 150
         elif namn == "Gruk, förstöraren":
             self.atk = 75
             self.mhp = 350
             self.hp = 350
             self.int = 70
             self.special = 1
+            self.exp = 300
         elif namn == "Trollvakt":
             self.atk = 100
             self.mhp = 100
             self.hp = 100
             self.int = 100
             self.special = 0
+            self.exp = 100
         elif namn == "Trollgeneral":
             self.atk = 150
             self.mhp = 200
             self.hp = 200
             self.int = 150
             self.special = 1
+            self.exp = 200
         elif namn == "Kungens väktare":
             self.atk = 200
             self.mhp = 300
             self.hp = 300
             self.int = 200
             self.special = 1
+            self.exp = 500
         elif namn == "Gregg den listige":
             self.atk = 50
             self.mhp = 400
             self.hp = 400
             self.int = 200
             self.special = 1
+            self.exp = 750
         elif namn == "Monkel Tronkel III":
             self.atk = 150
             self.mhp = 500
             self.hp = 500
             self.int = 2000
             self.special = 2
+        elif namn == "Monkel Tronkel, gud över trollhättan":
+            self.atk = 200
+            self.mhp = 750
+            self.hp = 750
+            self.int = 2000
+            self.special = 3
+            self.superspecial = 1
         else:
             self.atk = r.randint(1,20)
             self.mhp = r.randint(20,200)
             self.hp = self.mhp
             self.int = r.randint(5,50)
             self.special = 0
+            self.exp = self.atk//3 + self.mhp//3 + self.int//3
 def flerastrid(a,b,c):
     i_strid = True
     flychans = [0,1,2,3,4,5]
@@ -100,6 +118,7 @@ def flerastrid(a,b,c):
             slowprint("Skriv j för ja, n för nej ---> ")
             flykt = input()
             if flykt == "j":
+                flychans = [0,1,2,3,4,5]
                 if r.choice(flychans) == 0 or r.choice(flychans) == 1 or r.choice(flychans) == 2:
                     slowprint("Du lyckas fly från striden!")
                     i_strid = False
@@ -138,6 +157,7 @@ def flerastrid(a,b,c):
             elif i==3 and troll_nr3.hp>0:
                 slowprint(f"{i}. {troll_nr3.namn} (hp: {troll_nr3.hp})")
         slowprint("a. Attackera alla troll")
+        slowprint("Öppna ryggsäcken med s")
         val = input("---> ")
         if val == "1" and troll_nr1.hp>0:
             slowprint(f"""Använder du attackera eller utsmarta {troll_nr1.namn}? 
@@ -234,7 +254,13 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
             fval = input()
             if fval == "a":
                 din_skada = r.randint(0,klass.atk)
-                troll_försvar = r.randint(0,troll_nr1.atk + troll_nr2.atk + troll_nr3.atk)
+                troll_försvar = 0
+                if troll_nr1.hp>0:
+                    troll_försvar += r.randint(0,troll_nr1.atk)
+                if troll_nr2.hp>0:
+                    troll_försvar += r.randint(0,troll_nr2.atk)
+                if troll_nr3.hp>0:
+                    troll_försvar += r.randint(0,troll_nr3.atk)
                 if din_skada>troll_försvar:
                     skada = din_skada - troll_försvar
                     if troll_nr1.hp>0:
@@ -262,7 +288,13 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                     slowprint("Du missar din attack!")
             elif fval == "u":
                 din_skada = r.randint(0,klass.int)
-                troll_försvar = r.randint(0,troll_nr1.int + troll_nr2.int + troll_nr3.int)
+                troll_försvar = 0
+                if troll_nr1.hp>0:
+                    troll_försvar += r.randint(0,troll_nr1.int)
+                if troll_nr2.hp>0:
+                    troll_försvar += r.randint(0,troll_nr2.int)
+                if troll_nr3.hp>0:
+                    troll_försvar += r.randint(0,troll_nr3.int)
                 if din_skada>troll_försvar:
                     skada = din_skada - troll_försvar
                     if troll_nr1.hp>0:
@@ -286,12 +318,48 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                             antal_troll -= 1
                         else:
                             slowprint(f"Du gör {skada} skada på {troll_nr3.namn}!")
+        elif val == "s":
+            öppna_säckfan()
+            if "Styrkebryggd" in ryggsäck:
+                slowprint("Vill du använda styrkebryggden för en tillfällig styrkeökning på 5?")
+                bryggdval = input("Tryck j för ja--->")
+                if bryggdval == "j":
+                    bryggdnedräkning = 3
+                    klass.atk += 5
+                    slowprint("Din attack har ökat med 5!")
+                    ryggsäck.remove("Styrkebryggd")
+                else:
+                    slowprint("Du lägger tillbaka styrkebryggden i ryggsäcken.")
+            if "Mattebok" in ryggsäck:
+                slowprint("Vill du använda matteboken för en tillfällig intelligensökning på 5?")
+                bokval = input("Tryck j för ja--->")
+                bokval = bokval.lower()
+                if bokval == "j":
+                    boknedräkning = 3
+                    klass.int  += 5
+                    slowprint("Din intelligens har ökat med 5!")
+                    ryggsäck.remove("Mattebok")
+            if "Guldäpple" in ryggsäck:
+                slowprint("Vill du äta ett guldäpple?")
+                äppleval = input("Tryck j för ja--->")
+                äppleval = äppleval.lower()
+                if äppleval == "j":
+                    klass.hp += 50
+                    slowprint("Din hp har ökat med 50! HP:t från guldäpplet övergår MHP!")
+                    ryggsäck.remove("Guldäpple")
+            if "Livselixir" in ryggsäck and klass.hp <=klass.mhp-25:
+                slowprint("Vill du använda ett livselixir för att återställa 25 hp?")
+                elixirval = input("Tryck j för ja--->")
+                elixirval = elixirval.lower()
+                if elixirval == "j":
+                    klass.hp += 25
+                    slowprint("Du återställer 25 hp!")
         else:
             slowprint("Välj ett giltigt alternativ!")
         trolltur = True
         while trolltur:
             Troll_attack = r.randint(1,3)
-            if Troll_attack == 1 and troll_nr1.hp>0:
+            if troll_nr1.hp>0:
                 försvar = r.randint(0,klass.atk)
                 troll1_atk = r.randint(0,troll_nr1.atk)
                 troll1_int = r.randint(0,troll_nr1.int)
@@ -312,8 +380,7 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                         skada = troll1_int - försvar
                         klass.hp -= skada
                         slowprint(f"{troll_nr1.namn} utsmartar dig och gör {skada} skada!")
-                trolltur = False
-            elif Troll_attack == 2 and troll_nr2.hp>0:
+            if troll_nr2.hp>0:
                 försvar = r.randint(0,klass.atk)
                 troll2_atk = r.randint(0,troll_nr2.atk)
                 troll2_int = r.randint(0,troll_nr2.int)
@@ -334,8 +401,7 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                         skada = troll2_int - försvar
                         klass.hp -= skada
                         slowprint(f"{troll_nr2.namn} utsmartar dig och gör {skada} skada!")
-                trolltur = False
-            elif Troll_attack == 3 and troll_nr3.hp>0:
+            if troll_nr3.hp>0:
                 försvar = r.randint(0,klass.atk)
                 troll3_atk = r.randint(0,troll_nr3.atk)
                 troll3_int = r.randint(0,troll_nr3.int)
@@ -356,11 +422,61 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
                         skada = troll3_int - försvar
                         klass.hp -= skada
                         slowprint(f"{troll_nr3.namn} utsmartar dig och gör {skada} skada!")
-                trolltur = False
+            trolltur = False
+        input("Tryck enter för att  fortsätta...")
         rensa()
     if antal_troll == 0:
-        slowprint(f"Du har besegrat alla trollen! Du  tjänar exp för varje troll du dödade. Totalt får du {troll_nr1.mhp + troll_nr2.mhp + troll_nr3.mhp} exp!")
-        klass.exp += troll_nr1.mhp + troll_nr2.mhp + troll_nr3.mhp
+        slowprint(f"Du vann striden! Du tjänar {troll_nr1.exp + troll_nr2.exp + troll_nr3.exp} exp! Och kanske ett föremål...")
+        if bryggdnedräkning > 0:
+            bryggdnedräkning -= 1
+            if bryggdnedräkning <= 0:
+                klass.atk -= 5
+                slowprint("Effekten av styrkebryggden har försvunnit och din attack minskar med 5.")
+        if boknedräkning > 0:
+            boknedräkning -= 1
+            if boknedräkning <= 0:
+                klass.int -= 5
+                slowprint("Effekten av matteboken har försvunnit och din intelligens minskar med 5.")
+        föremål_chans = r.randint(1,8)
+        if föremål_chans == 1:
+            slowprint("Trollet hade ett livselixir och du plockar upp det!")
+            ryggsäck.append("Livselixir")
+        elif föremål_chans == 2:
+            slowprint("Trollet hade en styrkebryggd och du plockar upp den!")
+            ryggsäck.append("Styrkebryggd")
+            slowprint("Vill du använda styrkebryggden för en tillfällig styrkeökning på 5?")
+            bryggdval = input("Tryck j för ja--->")
+            if bryggdval == "j":
+                bryggdnedräkning = 3
+                klass.atk += 5
+                slowprint("Din attack har ökat med 5!")
+                ryggsäck.remove("Styrkebryggd")
+            else:
+                slowprint("Du lägger tillbaka styrkebryggden i ryggsäcken.")
+        elif föremål_chans == 3:
+            slowprint("Trollet hade en mattebok och  du plockar upp den!")
+            ryggsäck.append("Mattebok")
+            slowprint("Vill du använda matteboken för en tillfällig intelligensökning på 5?")
+            bokval = input("Tryck j för ja--->")
+            if bokval == "j":
+                boknedräkning = 3
+                klass.int += 5
+                slowprint("Din intelligens har ökat med 5!")
+                ryggsäck.remove("Mattebok")
+            else:
+                slowprint("Du lägger tillbaka matteboken i ryggsäcken.")
+        elif föremål_chans == 4:
+            slowprint("Trollet hade ett guldäpple och du plockar upp det!")
+            ryggsäck.append("Guldäpple")
+            slowprint("Vill du använda guldäpplet för en tillfällig hp-ökning på 50?")
+            guldäppleval = input("Tryck j för ja--->")
+            if guldäppleval == "j":
+                klass.hp += 50
+                slowprint("Din hp har ökat med 50! HP:t från guldäpplet övergår MHP!")
+                ryggsäck.remove("Guldäpple")
+            else:
+                slowprint("Du lägger tillbaka guldäpplet i ryggsäcken.")
+        klass.exp += troll_nr1.exp + troll_nr2.exp + troll_nr3.exp
         threshold = int(100 * (1.1 ** klass.lvl))
         while klass.exp >= threshold:
             klass.exp -= threshold
@@ -370,6 +486,8 @@ Trollet har statsen atk: {troll_nr3.atk}, int: {troll_nr3.int}. a för attackera
             slowprint("Du vann striden, så du tjänar 15 aura,eftersom det var en 3v1!")
             klass.stk += 15
         rensa()
+        levande = True
+        return levande
     elif klass.hp<=0:
         slowprint("Du dog... Åva kommer nu gå under av trollens framafart...")
         levande = False
@@ -422,6 +540,40 @@ def singelstrid(a):
                 slowprint("Du missar din attack!")
         elif stridval == "2":
             öppna_säckfan()
+            if "Styrkebryggd" in ryggsäck:
+                slowprint("Vill du använda styrkebryggden för en tillfällig styrkeökning på 5?")
+                bryggdval = input("Tryck j för ja--->")
+                if bryggdval == "j":
+                    bryggdnedräkning = 3
+                    klass.atk += 5
+                    slowprint("Din attack har ökat med 5!")
+                    ryggsäck.remove("Styrkebryggd")
+                else:
+                    slowprint("Du lägger tillbaka styrkebryggden i ryggsäcken.")
+            if "Mattebok" in ryggsäck:
+                slowprint("Vill du använda matteboken för en tillfällig intelligensökning på 5?")
+                bokval = input("Tryck j för ja--->")
+                bokval = bokval.lower()
+                if bokval == "j":
+                    boknedräkning = 3
+                    klass.int  += 5
+                    slowprint("Din intelligens har ökat med 5!")
+                    ryggsäck.remove("Mattebok")
+            if "Guldäpple" in ryggsäck:
+                slowprint("Vill du äta ett guldäpple?")
+                äppleval = input("Tryck j för ja--->")
+                äppleval = äppleval.lower()
+                if äppleval == "j":
+                    klass.hp += 50
+                    slowprint("Din hp har ökat med 50! HP:t från guldäpplet övergår MHP!")
+                    ryggsäck.remove("Guldäpple")
+            if "Livselixir" in ryggsäck and klass.hp <=klass.mhp-25:
+                slowprint("Vill du använda ett livselixir för att återställa 25 hp?")
+                elixirval = input("Tryck j för ja--->")
+                elixirval = elixirval.lower()
+                if elixirval == "j":
+                    klass.hp += 25
+                    slowprint("Du återställer 25 hp!")
         elif stridval == "3":
             din_skada = r.randint(0,klass.int)
             troll1_försvar = r.randint(0,troll1.int)
@@ -463,17 +615,70 @@ def singelstrid(a):
                 slowprint(f"{troll1.namn} utsmartar dig och gör {skada} skada!")
             else:
                 slowprint(f"{troll1.namn} misslyckas med att utsmarta dig!")
+        input("Tryck enter för att fortsätta...")
         rensa()
 
     if troll1.hp <= 0:
-        slowprint(f"{troll1.namn} dog och du får {troll1.mhp} exp! ")
-        klass.exp += troll1.mhp
+        slowprint(f"Du vann striden! Du tjänar {troll1.exp} exp! Och kanske ett föremål...")
+        if bryggdnedräkning > 0:
+            bryggdnedräkning -= 1
+            if bryggdnedräkning <= 0:
+                klass.atk -= 5
+                slowprint("Effekten av styrkebryggden har försvunnit och din attack minskar med 5.")
+        if boknedräkning > 0:
+            boknedräkning -= 1
+            if boknedräkning <= 0:
+                klass.int -= 5
+                slowprint("Effekten av matteboken har försvunnit och din intelligens minskar med 5.")
+        föremål_chans = r.randint(1,8)
+        if föremål_chans == 1:
+            slowprint("Trollet hade ett livselixir och du plockar upp det!")
+            ryggsäck.append("Livselixir")
+        elif föremål_chans == 2:
+            slowprint("Trollet hade en styrkebryggd och du plockar upp den!")
+            ryggsäck.append("Styrkebryggd")
+            slowprint("Vill du använda styrkebryggden för en tillfällig styrkeökning på 5?")
+            bryggdval = input("Tryck j för ja--->")
+            if bryggdval == "j":
+                bryggdnedräkning = 3
+                klass.atk += 5
+                slowprint("Din attack har ökat med 5!")
+                ryggsäck.remove("Styrkebryggd")
+            else:
+                slowprint("Du lägger tillbaka styrkebryggden i ryggsäcken.")
+        elif föremål_chans == 3:
+            slowprint("Trollet hade en mattebok och  du plockar upp den!")
+            ryggsäck.append("Mattebok")
+            slowprint("Vill du använda matteboken för en tillfällig intelligensökning på 5?")
+            bokval = input("Tryck j för ja--->")
+            if bokval == "j":
+                boknedräkning = 3
+                klass.int += 5
+                slowprint("Din intelligens har ökat med 5!")
+                ryggsäck.remove("Mattebok")
+            else:
+                slowprint("Du lägger tillbaka matteboken i ryggsäcken.")
+        elif föremål_chans == 4:
+            slowprint("Trollet hade ett guldäpple och du plockar upp det!")
+            ryggsäck.append("Guldäpple")
+            slowprint("Vill du använda guldäpplet för en tillfällig hp-ökning på 50?")
+            guldäppleval = input("Tryck j för ja--->")
+            if guldäppleval == "j":
+                klass.hp += 50
+                slowprint("Din hp har ökat med 50! HP:t från guldäpplet övergår MHP!")
+                ryggsäck.remove("Guldäpple")
+            else:
+                slowprint("Du lägger tillbaka guldäpplet i ryggsäcken.")
+        slowprint(f"{troll1.namn} dog och du får {troll1.exp} exp! ")
+        klass.exp += troll1.exp
         threshold = int(100 * (1.1 ** klass.lvl))
         while klass.exp >= threshold:
             klass.exp -= threshold
             levelup()
             threshold = int(100 * (1.1 ** klass.lvl))
-        rensa()
+            rensa()
+        levande = True
+        return levande
     elif klass.hp<=0:
         slowprint("Du dog... Åva kommer nu gå under av trollens framafart...")
         levande = False

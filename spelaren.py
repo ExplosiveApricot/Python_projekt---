@@ -15,7 +15,7 @@ class spelaren():
         if klassval == "3": 
             return self.base_atk + self.stk
         elif klassval == "1": 
-            return self.base_atk + (self.mhp - self.hp)
+            return self.base_atk + ((self.mhp - self.hp)-(self.mhp-self.hp)%3)//3
         else: 
             return self.base_atk
 
