@@ -1,7 +1,7 @@
 from slowtypeshii import slowprint
 
 class spelaren():
-    def __init__(self, atk, mhp, hp, int, stk, lvl, exp, bryggdnedräkning, boknedräkning):
+    def __init__(self, atk, mhp, hp, int, stk, lvl, exp, bryggdnedräkning, boknedräkning, levande):
         self.base_atk = atk 
         self.mhp = mhp
         self.hp = hp
@@ -11,6 +11,7 @@ class spelaren():
         self.stk = stk
         self.bryggdnedräkning = bryggdnedräkning
         self.boknedräkning = boknedräkning
+        self.levande = levande
 
 
     @property
@@ -37,17 +38,17 @@ while not klas:
     klassval = input("Ditt val---> ")
 
     if klassval == "1":
-        klass = spelaren(20,100,100,0,0,0,0,0,0)
+        klass = spelaren(20,100,100,0,0,0,0,0,0, True)
         slowprint(f"Random Dansk: Du går bygg och har därmed statsen: {klass.atk} atk, {klass.mhp} hp och {klass.int} int. Din skada ökar också med förlorat hp!")
         klas = True
 
     elif klassval == "2":
-        klass = spelaren(0,100,100,20,5,0,0,0,0)
+        klass = spelaren(0,100,100,20,5,0,0,0,0, True)
         slowprint(f"Random Dansk: Det var alltså du som lukta, du har statsen: {klass.atk} atk, {klass.mhp} hp och {klass.int} int, du  har också {klass.stk} stinknivå.")
         klas = True
 
     elif klassval == "3":
-        klass = spelaren(10,100,100,10,0,0,0,0,0)
+        klass = spelaren(10,100,100,10,0,0,0,0,0, True)
         slowprint(f"Random Dansk: Du går nu sam med statsen: {klass.atk} atk, {klass.mhp} hp och {klass.int} int. Se till att samla aura!")
         klas = True
 
