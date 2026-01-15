@@ -51,8 +51,8 @@ while not klas:
     else:
         slowprint("Välj ett av alternativen tack :)")
     
-    bryggdnedräkning = 0
-    boknedräkning = 0
+bryggdnedräkning = 0
+boknedräkning = 0
 
 
 
